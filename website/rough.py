@@ -24,3 +24,52 @@ for row in range(rows):
         else:
             print(" ", end="")
     print()
+
+
+
+
+from flask import Flask, request, redirect, url_for, render_template, session
+from werkzeug.security import generate_password_hash, check_password_hash
+
+app = Flask(__name__)
+app.secret_key = "your_secret_key"  # Required for using sessions
+
+# Store a hashed password (in a real app, this would be in a database)
+hashed_password = generate_password_hash("securepassword")
+
+# Route for login page
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        entered_password = request.form['password']
+
+        # Check the entered password against the hashed password
+        if check_password_hash(hashed_password, entered_password):
+            session['authenticated'] = True  # Store authentication status in the session
+            return redirect(url_for('protected_page'))
+        else:
+            return "Incorrect password! Please try again."
+
+    return '''
+        <form method="post">
+            Password: <input type="password" name="password">
+            <input type="submit" value="Login">
+        </form>
+    '''
+
+# Route for the protected page
+@app.route('/protected')
+def protected_page():
+    if not session.get('authenticated'):  # Check if the user is authenticated
+        return redirect(url_for('login'))  # Redirect to login if not authenticated
+
+    return "Welcome to the protected page!"
+
+# Logout route
+@app.route('/logout')
+def logout():
+    session.pop('authenticated', None)  # Clear the session
+    return redirect(url_for('login'))
+
+if __name__ == '__main__':
+    app.run(debug=True)

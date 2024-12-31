@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-4">
+  <h1>Welcome, {{ user.fname }}!</h1>  <!-- Displaying the user's first name -->
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a href="{{ url_for('views.AddStudent') }}" class="btn btn-primary btn-block">Add Student</a>  <!-- This now links to the AddStudent route -->
+    </div>
+    <div class="col-md-3">
+      <a href="{{ url_for('views.MarksLodger') }}" class="btn btn-secondary btn-block">Student Marks Lodger</a>
+    </div>
+    <div class="col-md-3">
+      <a href="{{ url_for('views.Students') }}" class="btn btn-success btn-block">View Students</a>
+    </div>
+    <div class="col-md-3">
+      <a href="{{ url_for('views.FeeLodger') }}" class="btn btn-warning btn-block">Student Fee Lodger</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
