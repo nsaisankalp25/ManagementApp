@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-4">
+  <h1>Add Student</h1>
+</div>
+
+<div class="container mt-4">
+  <form method="POST">
+    <!-- Add your form fields here for adding a student -->
+    <div class="form-group">
+      <label for="student_name">Student Name</label>
+      <input type="text" class="form-control" id="student_name" name="student_name" required>
+    </div>
+    <div class="form-group">
+      <label for="student_age">Student Age</label>
+      <input type="number" class="form-control" id="student_age" name="student_age" required>
+    </div>
+    <div class="form-group">
+      <label for="student_grade">Student Grade</label>
+      <input type="text" class="form-control" id="student_grade" name="student_grade" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Student</button>
+  </form>
+</div>
+{% endblock %}

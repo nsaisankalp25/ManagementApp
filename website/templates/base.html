@@ -29,39 +29,42 @@
       <a class="nav-item nav-link" href="/logout">Logout</a>
       <a class="nav-item nav-link" href="/login">Login</a>
       <a class="nav-item nav-link" href="/signup">Sign Up</a>
+      <!-- Add the Student Portal button -->
+      <a class="nav-item nav-link" href="{{ url_for('views.Portal') }}">Student Portal</a>  <!-- You will need to create this route in your Flask app -->
     </div>
   </nav>
 
-  {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'email_error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if category == 'email_error' %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% else %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
   <!-- Centered Text (if needed for the homepage or fallback) -->
   <div class="centered-text">
     {% block centered_text %}
-    
     {% endblock %}
   </div>
 
   <!-- Main Content Section -->
   <div class="container mt-4">
     {% block content %}
-
     {% endblock %}
   </div>
 
